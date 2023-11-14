@@ -1,7 +1,7 @@
 /*
  * software_timer.h
  *
- *  Created on: Nov 14, 2023
+ *  Created on: Nov 5, 2023
  *      Author: Quoc Viet
  */
 
@@ -18,8 +18,10 @@
 //timer 6 for blinking 4 led of system
 extern int timer_counter[NUMBER_OF_TIMER];
 extern int timer_flag[NUMBER_OF_TIMER];
+extern int timer1_flag;
 
 void set_timer(int index, int duration);
+void set_timer1( int duration);
 void clear_timer(int index);
 int is_timer_timeout(int index);
 int get_time_of_counter(int index);

@@ -157,9 +157,15 @@ void led_7seg_run(){
 	turn_on_led_7seg(index_led_7_seg);
 	display_led_7seg(led_7_seg_buffer[index_led_7_seg]);
 	//switch index after 500ms, index increase 1 and index assign 0 when index = 4;
-	if(is_timer_timeout(3)){
+//	if(is_timer_timeout(3)){
+//		index_led_7_seg= (index_led_7_seg+1)%4;
+//		set_timer1(25);
+//	}
+
+	if(timer1_flag == 1)
+	{
 		index_led_7_seg= (index_led_7_seg+1)%4;
-		set_timer(3, 500);
+		set_timer1(25);
 	}
 }
 

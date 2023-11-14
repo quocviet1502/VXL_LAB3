@@ -101,6 +101,7 @@ int main(void)
   /* USER CODE BEGIN WHILE */
 
   set_timer(3, 100);
+  set_timer1(3);
   while (1)
   {
 
