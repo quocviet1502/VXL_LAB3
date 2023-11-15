@@ -1454,7 +1454,7 @@ int main(void)
  8000b16:	2164      	movs	r1, #100	; 0x64
  8000b18:	2003      	movs	r0, #3
  8000b1a:	f000 f907 	bl	8000d2c <set_timer>
-  set_timer1(3);
+  set_timer1(3);//4Led_7SEG
  8000b1e:	2003      	movs	r0, #3
  8000b20:	f000 f91e 	bl	8000d60 <set_timer1>
   while (1)
