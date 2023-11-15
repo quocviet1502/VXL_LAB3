@@ -45,7 +45,6 @@ void turn_on_led_7seg(int index){
 	}
 }
 
-
 void display_led_7seg(int number){
 	switch(number){
 	case 0:
@@ -146,7 +145,6 @@ void display_led_7seg(int number){
 void update_2_buffer_led_7seg_left(int number1){
 		led_7_seg_buffer[0] = (number1/1000)/10;
 		led_7_seg_buffer[1] = (number1/1000)%10;
-
 }
 void update_2_buffer_led_7seg_right(int number2){
 		led_7_seg_buffer[2] =( number2/1000)/10;

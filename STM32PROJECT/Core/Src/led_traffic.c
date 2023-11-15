@@ -7,26 +7,25 @@
 
 #include <led_traffic.h>
 
-
 void turn_on_traffic_led_1(){
 	switch(state_led_traffic_1){
 		case RED:
 			HAL_GPIO_WritePin(GPIOA, LED_RED_1_Pin, RESET);
 			HAL_GPIO_WritePin(GPIOA, LED_YELLOW_1_Pin, SET);
 			HAL_GPIO_WritePin(GPIOA, LED_GREEN_1_Pin, SET);
-		break;
+			break;
 		case YELLOW:
 			HAL_GPIO_WritePin(GPIOA, LED_RED_1_Pin, SET);
 			HAL_GPIO_WritePin(GPIOA, LED_YELLOW_1_Pin, RESET);
 			HAL_GPIO_WritePin(GPIOA, LED_GREEN_1_Pin, SET);
-		break;
+			break;
 		case GREEN:
 			HAL_GPIO_WritePin(GPIOA, LED_RED_1_Pin, SET);
 			HAL_GPIO_WritePin(GPIOA, LED_YELLOW_1_Pin, SET);
 			HAL_GPIO_WritePin(GPIOA, LED_GREEN_1_Pin, RESET);
-		break;
+			break;
 		default:
-		break;
+			break;
 	}
 }
 void turn_on_traffic_led_2(){
@@ -35,40 +34,40 @@ void turn_on_traffic_led_2(){
 			HAL_GPIO_WritePin(GPIOA, LED_RED_2_Pin, RESET);
 			HAL_GPIO_WritePin(GPIOA, LED_YELLOW_2_Pin, SET);
 			HAL_GPIO_WritePin(GPIOA, LED_GREEN_2_Pin, SET);
-		break;
+			break;
 		case YELLOW:
 			HAL_GPIO_WritePin(GPIOA, LED_RED_2_Pin, SET);
 			HAL_GPIO_WritePin(GPIOA, LED_YELLOW_2_Pin, RESET);
 			HAL_GPIO_WritePin(GPIOA, LED_GREEN_2_Pin, SET);
-		break;
+			break;
 		case GREEN:
 			HAL_GPIO_WritePin(GPIOA, LED_RED_2_Pin, SET);
 			HAL_GPIO_WritePin(GPIOA, LED_YELLOW_2_Pin, SET);
 			HAL_GPIO_WritePin(GPIOA, LED_GREEN_2_Pin, RESET);
-		break;
+			break;
 		default:
-		break;
+			break;
 	}
 }
 
 void blinkind_led_traffic_1(){
 	switch(state_led_traffic_1){
-			case RED:
-				HAL_GPIO_TogglePin(GPIOA, LED_RED_1_Pin);
-				HAL_GPIO_WritePin(GPIOA, LED_YELLOW_1_Pin, SET);
-				HAL_GPIO_WritePin(GPIOA, LED_GREEN_1_Pin, SET);
+		case RED:
+			HAL_GPIO_TogglePin(GPIOA, LED_RED_1_Pin);
+			HAL_GPIO_WritePin(GPIOA, LED_YELLOW_1_Pin, SET);
+			HAL_GPIO_WritePin(GPIOA, LED_GREEN_1_Pin, SET);
 			break;
-			case YELLOW:
-				HAL_GPIO_WritePin(GPIOA, LED_GREEN_1_Pin, SET);
-				HAL_GPIO_TogglePin(GPIOA, LED_YELLOW_1_Pin);
-				HAL_GPIO_WritePin(GPIOA, LED_RED_1_Pin, SET);
+		case YELLOW:
+			HAL_GPIO_WritePin(GPIOA, LED_GREEN_1_Pin, SET);
+			HAL_GPIO_TogglePin(GPIOA, LED_YELLOW_1_Pin);
+			HAL_GPIO_WritePin(GPIOA, LED_RED_1_Pin, SET);
 			break;
-			case GREEN:
-				HAL_GPIO_WritePin(GPIOA, LED_YELLOW_1_Pin, SET);
-				HAL_GPIO_WritePin(GPIOA, LED_RED_1_Pin, SET);
-				HAL_GPIO_TogglePin(GPIOA, LED_GREEN_1_Pin);
+		case GREEN:
+			HAL_GPIO_WritePin(GPIOA, LED_YELLOW_1_Pin, SET);
+			HAL_GPIO_WritePin(GPIOA, LED_RED_1_Pin, SET);
+			HAL_GPIO_TogglePin(GPIOA, LED_GREEN_1_Pin);
 			break;
-			default:
+		default:
 			break;
 		}
 }

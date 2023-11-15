@@ -37,13 +37,13 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING, OCTETS
  16 .debug_macro  00016d19  00000000  00000000  0002c868  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_line   0000babd  00000000  00000000  00043581  2**0
+ 17 .debug_line   0000ba98  00000000  00000000  00043581  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_str    0008255c  00000000  00000000  0004f03e  2**0
+ 18 .debug_str    0008255c  00000000  00000000  0004f019  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .comment      00000053  00000000  00000000  000d159a  2**0
+ 19 .comment      00000053  00000000  00000000  000d1575  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  00002944  00000000  00000000  000d15f0  2**2
+ 20 .debug_frame  00002944  00000000  00000000  000d15c8  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -77,10 +77,10 @@ Disassembly of section .text:
  8000148:	08002ac0 	.word	0x08002ac0
 
 0800014c <is_pressed>:
+int state_of_button[NUMBER_OF_BUTTON] = {[0 ... NUMBER_OF_BUTTON - 1] = BUTTON_RELEASED};
 
 int flag_for_pressed[NUMBER_OF_BUTTON] = {0};
 int flag_for_pressed_3s[NUMBER_OF_BUTTON] = {0};
-
 
 int is_pressed(int index){
  800014c:	b480      	push	{r7}
@@ -202,7 +202,6 @@ void read_input(){
 			break;
  8000210:	bf00      	nop
 		}
-
 		if(register0_key[i] == register1_key[i] && register1_key[i] == register2_key[i]){
  8000212:	4a14      	ldr	r2, [pc, #80]	; (8000264 <read_input+0xdc>)
  8000214:	687b      	ldr	r3, [r7, #4]
@@ -270,9 +269,9 @@ void fsm_for_button(){
  8000292:	d002      	beq.n	800029a <fsm_for_button+0x26>
  8000294:	2b15      	cmp	r3, #21
  8000296:	d016      	beq.n	80002c6 <fsm_for_button+0x52>
+			if(button_buffer[i] == BUTTON_IS_RELEASED){
 				state_of_button[i] = BUTTON_RELEASED;
 			}
-
 			break;
 		default:
 			break;
@@ -362,8 +361,6 @@ void fsm_for_button(){
  8000330:	687b      	ldr	r3, [r7, #4]
  8000332:	2b02      	cmp	r3, #2
  8000334:	dda4      	ble.n	8000280 <fsm_for_button+0xc>
-
-
 
 		}
 	}
@@ -524,7 +521,6 @@ void turn_on_led_7seg(int index){
  8000450:	40010c00 	.word	0x40010c00
 
 08000454 <display_led_7seg>:
-
 
 void display_led_7seg(int number){
  8000454:	b580      	push	{r7, lr}
@@ -975,7 +971,6 @@ void update_2_buffer_led_7seg_left(int number1){
  8000814:	1aca      	subs	r2, r1, r3
  8000816:	4b04      	ldr	r3, [pc, #16]	; (8000828 <update_2_buffer_led_7seg_left+0x50>)
  8000818:	605a      	str	r2, [r3, #4]
-
 }
  800081a:	bf00      	nop
  800081c:	370c      	adds	r7, #12
@@ -1079,10 +1074,10 @@ void led_7seg_run(){
  80008e0:	20000100 	.word	0x20000100
 
 080008e4 <turn_on_traffic_led_1>:
+ *      Author: Quoc Viet
  */
 
 #include <led_traffic.h>
-
 
 void turn_on_traffic_led_1(){
  80008e4:	b580      	push	{r7, lr}
@@ -1101,9 +1096,9 @@ void turn_on_traffic_led_1(){
 			HAL_GPIO_WritePin(GPIOA, LED_RED_1_Pin, SET);
 			HAL_GPIO_WritePin(GPIOA, LED_YELLOW_1_Pin, SET);
 			HAL_GPIO_WritePin(GPIOA, LED_GREEN_1_Pin, RESET);
-		break;
+			break;
 		default:
-		break;
+			break;
  80008fc:	e02f      	b.n	800095e <turn_on_traffic_led_1+0x7a>
 			HAL_GPIO_WritePin(GPIOA, LED_RED_1_Pin, RESET);
  80008fe:	2200      	movs	r2, #0
@@ -1120,7 +1115,7 @@ void turn_on_traffic_led_1(){
  8000914:	2104      	movs	r1, #4
  8000916:	4814      	ldr	r0, [pc, #80]	; (8000968 <turn_on_traffic_led_1+0x84>)
  8000918:	f001 f8b1 	bl	8001a7e <HAL_GPIO_WritePin>
-		break;
+			break;
  800091c:	e020      	b.n	8000960 <turn_on_traffic_led_1+0x7c>
 			HAL_GPIO_WritePin(GPIOA, LED_RED_1_Pin, SET);
  800091e:	2201      	movs	r2, #1
@@ -1137,7 +1132,7 @@ void turn_on_traffic_led_1(){
  8000934:	2104      	movs	r1, #4
  8000936:	480c      	ldr	r0, [pc, #48]	; (8000968 <turn_on_traffic_led_1+0x84>)
  8000938:	f001 f8a1 	bl	8001a7e <HAL_GPIO_WritePin>
-		break;
+			break;
  800093c:	e010      	b.n	8000960 <turn_on_traffic_led_1+0x7c>
 			HAL_GPIO_WritePin(GPIOA, LED_RED_1_Pin, SET);
  800093e:	2201      	movs	r2, #1
@@ -1154,9 +1149,9 @@ void turn_on_traffic_led_1(){
  8000954:	2104      	movs	r1, #4
  8000956:	4804      	ldr	r0, [pc, #16]	; (8000968 <turn_on_traffic_led_1+0x84>)
  8000958:	f001 f891 	bl	8001a7e <HAL_GPIO_WritePin>
-		break;
+			break;
  800095c:	e000      	b.n	8000960 <turn_on_traffic_led_1+0x7c>
-		break;
+			break;
  800095e:	bf00      	nop
 	}
 }
@@ -1183,9 +1178,9 @@ void turn_on_traffic_led_2(){
 			HAL_GPIO_WritePin(GPIOA, LED_RED_2_Pin, SET);
 			HAL_GPIO_WritePin(GPIOA, LED_YELLOW_2_Pin, SET);
 			HAL_GPIO_WritePin(GPIOA, LED_GREEN_2_Pin, RESET);
-		break;
+			break;
 		default:
-		break;
+			break;
  8000984:	e02f      	b.n	80009e6 <turn_on_traffic_led_2+0x7a>
 			HAL_GPIO_WritePin(GPIOA, LED_RED_2_Pin, RESET);
  8000986:	2200      	movs	r2, #0
@@ -1202,7 +1197,7 @@ void turn_on_traffic_led_2(){
  800099c:	2120      	movs	r1, #32
  800099e:	4814      	ldr	r0, [pc, #80]	; (80009f0 <turn_on_traffic_led_2+0x84>)
  80009a0:	f001 f86d 	bl	8001a7e <HAL_GPIO_WritePin>
-		break;
+			break;
  80009a4:	e020      	b.n	80009e8 <turn_on_traffic_led_2+0x7c>
 			HAL_GPIO_WritePin(GPIOA, LED_RED_2_Pin, SET);
  80009a6:	2201      	movs	r2, #1
@@ -1219,7 +1214,7 @@ void turn_on_traffic_led_2(){
  80009bc:	2120      	movs	r1, #32
  80009be:	480c      	ldr	r0, [pc, #48]	; (80009f0 <turn_on_traffic_led_2+0x84>)
  80009c0:	f001 f85d 	bl	8001a7e <HAL_GPIO_WritePin>
-		break;
+			break;
  80009c4:	e010      	b.n	80009e8 <turn_on_traffic_led_2+0x7c>
 			HAL_GPIO_WritePin(GPIOA, LED_RED_2_Pin, SET);
  80009c6:	2201      	movs	r2, #1
@@ -1236,9 +1231,9 @@ void turn_on_traffic_led_2(){
  80009dc:	2120      	movs	r1, #32
  80009de:	4804      	ldr	r0, [pc, #16]	; (80009f0 <turn_on_traffic_led_2+0x84>)
  80009e0:	f001 f84d 	bl	8001a7e <HAL_GPIO_WritePin>
-		break;
+			break;
  80009e4:	e000      	b.n	80009e8 <turn_on_traffic_led_2+0x7c>
-		break;
+			break;
  80009e6:	bf00      	nop
 	}
 }
@@ -1263,56 +1258,56 @@ void blinkind_led_traffic_1(){
  8000a06:	d002      	beq.n	8000a0e <blinkind_led_traffic_1+0x1a>
  8000a08:	2b0b      	cmp	r3, #11
  8000a0a:	d00f      	beq.n	8000a2c <blinkind_led_traffic_1+0x38>
-				HAL_GPIO_WritePin(GPIOA, LED_YELLOW_1_Pin, SET);
-				HAL_GPIO_WritePin(GPIOA, LED_RED_1_Pin, SET);
-				HAL_GPIO_TogglePin(GPIOA, LED_GREEN_1_Pin);
+			HAL_GPIO_WritePin(GPIOA, LED_YELLOW_1_Pin, SET);
+			HAL_GPIO_WritePin(GPIOA, LED_RED_1_Pin, SET);
+			HAL_GPIO_TogglePin(GPIOA, LED_GREEN_1_Pin);
 			break;
-			default:
+		default:
 			break;
  8000a0c:	e02c      	b.n	8000a68 <blinkind_led_traffic_1+0x74>
-				HAL_GPIO_TogglePin(GPIOA, LED_RED_1_Pin);
+			HAL_GPIO_TogglePin(GPIOA, LED_RED_1_Pin);
  8000a0e:	2101      	movs	r1, #1
  8000a10:	4818      	ldr	r0, [pc, #96]	; (8000a74 <blinkind_led_traffic_1+0x80>)
  8000a12:	f001 f84c 	bl	8001aae <HAL_GPIO_TogglePin>
-				HAL_GPIO_WritePin(GPIOA, LED_YELLOW_1_Pin, SET);
+			HAL_GPIO_WritePin(GPIOA, LED_YELLOW_1_Pin, SET);
  8000a16:	2201      	movs	r2, #1
  8000a18:	2102      	movs	r1, #2
  8000a1a:	4816      	ldr	r0, [pc, #88]	; (8000a74 <blinkind_led_traffic_1+0x80>)
  8000a1c:	f001 f82f 	bl	8001a7e <HAL_GPIO_WritePin>
-				HAL_GPIO_WritePin(GPIOA, LED_GREEN_1_Pin, SET);
+			HAL_GPIO_WritePin(GPIOA, LED_GREEN_1_Pin, SET);
  8000a20:	2201      	movs	r2, #1
  8000a22:	2104      	movs	r1, #4
  8000a24:	4813      	ldr	r0, [pc, #76]	; (8000a74 <blinkind_led_traffic_1+0x80>)
  8000a26:	f001 f82a 	bl	8001a7e <HAL_GPIO_WritePin>
 			break;
  8000a2a:	e01e      	b.n	8000a6a <blinkind_led_traffic_1+0x76>
-				HAL_GPIO_WritePin(GPIOA, LED_GREEN_1_Pin, SET);
+			HAL_GPIO_WritePin(GPIOA, LED_GREEN_1_Pin, SET);
  8000a2c:	2201      	movs	r2, #1
  8000a2e:	2104      	movs	r1, #4
  8000a30:	4810      	ldr	r0, [pc, #64]	; (8000a74 <blinkind_led_traffic_1+0x80>)
  8000a32:	f001 f824 	bl	8001a7e <HAL_GPIO_WritePin>
-				HAL_GPIO_TogglePin(GPIOA, LED_YELLOW_1_Pin);
+			HAL_GPIO_TogglePin(GPIOA, LED_YELLOW_1_Pin);
  8000a36:	2102      	movs	r1, #2
  8000a38:	480e      	ldr	r0, [pc, #56]	; (8000a74 <blinkind_led_traffic_1+0x80>)
  8000a3a:	f001 f838 	bl	8001aae <HAL_GPIO_TogglePin>
-				HAL_GPIO_WritePin(GPIOA, LED_RED_1_Pin, SET);
+			HAL_GPIO_WritePin(GPIOA, LED_RED_1_Pin, SET);
  8000a3e:	2201      	movs	r2, #1
  8000a40:	2101      	movs	r1, #1
  8000a42:	480c      	ldr	r0, [pc, #48]	; (8000a74 <blinkind_led_traffic_1+0x80>)
  8000a44:	f001 f81b 	bl	8001a7e <HAL_GPIO_WritePin>
 			break;
  8000a48:	e00f      	b.n	8000a6a <blinkind_led_traffic_1+0x76>
-				HAL_GPIO_WritePin(GPIOA, LED_YELLOW_1_Pin, SET);
+			HAL_GPIO_WritePin(GPIOA, LED_YELLOW_1_Pin, SET);
  8000a4a:	2201      	movs	r2, #1
  8000a4c:	2102      	movs	r1, #2
  8000a4e:	4809      	ldr	r0, [pc, #36]	; (8000a74 <blinkind_led_traffic_1+0x80>)
  8000a50:	f001 f815 	bl	8001a7e <HAL_GPIO_WritePin>
-				HAL_GPIO_WritePin(GPIOA, LED_RED_1_Pin, SET);
+			HAL_GPIO_WritePin(GPIOA, LED_RED_1_Pin, SET);
  8000a54:	2201      	movs	r2, #1
  8000a56:	2101      	movs	r1, #1
  8000a58:	4806      	ldr	r0, [pc, #24]	; (8000a74 <blinkind_led_traffic_1+0x80>)
  8000a5a:	f001 f810 	bl	8001a7e <HAL_GPIO_WritePin>
-				HAL_GPIO_TogglePin(GPIOA, LED_GREEN_1_Pin);
+			HAL_GPIO_TogglePin(GPIOA, LED_GREEN_1_Pin);
  8000a5e:	2104      	movs	r1, #4
  8000a60:	4804      	ldr	r0, [pc, #16]	; (8000a74 <blinkind_led_traffic_1+0x80>)
  8000a62:	f001 f824 	bl	8001aae <HAL_GPIO_TogglePin>
