@@ -21,17 +21,14 @@ void set_timer1(int duration){
 	timer1_flag = 0;
 }
 
-
 void clear_timer(int index){
 	timer_counter[index] = 0;
 	timer_flag[index] = 0;
 }
 
-
 int get_time_of_counter(int index){
 	return timer_counter[index]*TIME_CYCLE;
 }
-
 
 int is_timer_timeout(int index){
 	if(timer_flag[index]){

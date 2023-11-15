@@ -21,7 +21,7 @@ extern int timer_flag[NUMBER_OF_TIMER];
 extern int timer1_flag;
 
 void set_timer(int index, int duration);
-void set_timer1( int duration);
+void set_timer1( int duration);//4 lED_7SEG
 void clear_timer(int index);
 int is_timer_timeout(int index);
 int get_time_of_counter(int index);
